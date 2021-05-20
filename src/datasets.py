@@ -208,7 +208,7 @@ class NoisyDataset(AbstractDataset):
 
         # Load PIL image
         img_path = os.path.join(self.root_dir, self.imgs[index])
-        img =  Image.open(img_path).convert('RGB')
+        img =  Image.open(img_path)
 
         # Random square crop
         if self.crop_size != 0:
@@ -216,14 +216,10 @@ class NoisyDataset(AbstractDataset):
 
         # Corrupt source image
         tmp = self._corrupt(img)
-        source = tvF.to_tensor(self._corrupt(img))
 
-        # Corrupt target image, but not when clean targets are requested
-        if self.clean_targets:
-            target = tvF.to_tensor(img)
-        else:
-            target = tvF.to_tensor(self._corrupt(img))
-
+        source = tvF.to_tensor(img)
+        target = tvF.to_tensor(img)
+        
         return source, target
 
 
