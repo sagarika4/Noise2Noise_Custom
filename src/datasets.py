@@ -208,7 +208,7 @@ class NoisyDataset(AbstractDataset):
 
         # Load PIL image
         img_path = os.path.join(self.root_dir, self.imgs[index])
-        img =  Image.open(img_path)
+        img =  Image.open(img_path).convert('RGB')
 
         # Random square crop
         if self.crop_size != 0:
