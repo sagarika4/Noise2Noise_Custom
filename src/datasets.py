@@ -214,9 +214,6 @@ class NoisyDataset(AbstractDataset):
         if self.crop_size != 0:
             img = self._random_crop([img])[0]
 
-        # Corrupt source image
-        tmp = self._corrupt(img)
-
         source = tvF.to_tensor(img)
         target = tvF.to_tensor(img)
         
